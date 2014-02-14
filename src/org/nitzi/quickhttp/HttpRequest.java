@@ -1,7 +1,11 @@
 package org.nitzi.quickhttp;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class HttpRequest {
-	public HttpHeaders headers;
+	public Map<String, List<String>> headers;
 	public String data;
 	
 	public String toString() {

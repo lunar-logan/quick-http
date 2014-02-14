@@ -8,6 +8,8 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.CharBuffer;
+import java.util.HashMap;
+import java.util.List;
 
 public class QuickHttp {
 
@@ -27,7 +29,7 @@ public class QuickHttp {
 		URLConnection resourceConnection = resource.openConnection();
 
 		HttpRequest request = new HttpRequest();
-		request.headers = (HttpHeaders) resourceConnection.getHeaderFields();
+		request.headers = resourceConnection.getHeaderFields();
 
 		// Reading from the network
 		BufferedReader br = new BufferedReader(new InputStreamReader(
@@ -39,12 +41,11 @@ public class QuickHttp {
 																												// of
 																												// buffer
 		int len = 0;
-		while ((len = br.read(tempBuf)) != -1 && charBuffer.hasRemaining()) {
+		while ((len = br.read(tempBuf)) != -1 && charBuffer.remaining() >= len) {
 			charBuffer.put(tempBuf, 0, len);
-			charBuffer.flip();
 		}
 		br.close();
-
+		charBuffer.flip();
 		char[] data = charBuffer.array();
 		request.data = new String(data, 0, charBuffer.limit());
 
