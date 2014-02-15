@@ -8,8 +8,6 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.CharBuffer;
-import java.util.HashMap;
-import java.util.List;
 
 public class QuickHttp {
 
